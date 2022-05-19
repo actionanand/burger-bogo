@@ -73,6 +73,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 - [CSS Scoping in React - Everything You Need to Know](https://www.upbeatcode.com/react/css-scoping-in-react-everything-you-need-to-know/)
 - [How to deploy a React, Angular and Vue project to Github pages](https://deepinder.me/how-to-deploy-a-react-angular-vue-project-to-github-pages)
+- [html color names](https://www.htmlcsscolor.com/)
 
 ### Packages
 
