@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/burger-bogo/static/css/main.046e8b81.css",
-    "main.js": "/burger-bogo/static/js/main.571ab2fe.js",
+    "main.css": "/burger-bogo/static/css/main.226a8c9c.css",
+    "main.js": "/burger-bogo/static/js/main.40924146.js",
     "static/js/787.b25516f3.chunk.js": "/burger-bogo/static/js/787.b25516f3.chunk.js",
+    "static/media/burger-logo.png": "/burger-bogo/static/media/burger-logo.ec69c7f65e6d7565759f.png",
     "index.html": "/burger-bogo/index.html",
-    "main.046e8b81.css.map": "/burger-bogo/static/css/main.046e8b81.css.map",
-    "main.571ab2fe.js.map": "/burger-bogo/static/js/main.571ab2fe.js.map",
+    "main.226a8c9c.css.map": "/burger-bogo/static/css/main.226a8c9c.css.map",
+    "main.40924146.js.map": "/burger-bogo/static/js/main.40924146.js.map",
     "787.b25516f3.chunk.js.map": "/burger-bogo/static/js/787.b25516f3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.046e8b81.css",
-    "static/js/main.571ab2fe.js"
+    "static/css/main.226a8c9c.css",
+    "static/js/main.40924146.js"
   ]
 }
