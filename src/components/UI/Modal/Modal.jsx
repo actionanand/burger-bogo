@@ -8,7 +8,7 @@ import Backdrop from '../Backdrop/Backdrop';
 class Modal extends Component {
 
 shouldComponentUpdate(nxtProp, nxtState) {
-  return nxtProp.show !== this.props.show;
+  return nxtProp.show !== this.props.show || nxtProp.children !== this.props.children;
 }
 
 // componentDidUpdate() {
