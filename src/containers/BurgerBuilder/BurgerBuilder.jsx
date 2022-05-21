@@ -20,17 +20,23 @@ const INGREDIENT_PRICES = {
 class BurgerBuilder extends Component {
 
   state = {
-    ingredients: {
-      salad: 0,
-      bacon: 0,
-      cheese: 0,
-      meat: 0
-    },
+    ingredients: null,
     totalPrice: 4,
     purchasable: false,
     purchasing: false,
-    loading: false
+    loading: false,
+    error: false
   };
+
+  componentDidMount() {
+    axios.get('/ingredients.json')
+      .then(resp => {
+        this.setState({ingredients: resp.data});
+      })
+      .catch(err => {
+        this.setState({error: true});
+      });
+  }
 
   updatePurchaseState(ingredients) {
     const sum = Object.keys(ingredients)
@@ -124,10 +130,29 @@ class BurgerBuilder extends Component {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
 
-    let orderSummaryComp = <OrderSummary  ingredients={this.state.ingredients} 
-      purchaseCancelled={this.purchaseCancelHandler}
-      purchaseContinued={this.purchaseContinueHandler}
-      price={this.state.totalPrice.toFixed(2)} />;
+    let burgerAndBuildCntrComp = this.state.error ? <p>Unable to fetch ingredients!</p> : <Spinner />; 
+    let orderSummaryComp = null;
+
+    if (this.state.ingredients) {
+      burgerAndBuildCntrComp = (
+        <Aux>
+          <Burger ingredients={this.state.ingredients} />
+          <BuildControls 
+            ingredientsAdded={this.addIngredientsHandler}
+            ingredientsRemoved={this.removeIngredientsHandler}
+            disabled={disabledInfo}
+            purchasable={this.state.purchasable}
+            price={this.state.totalPrice} 
+            ordered = {this.purchaseHandler} />
+        </Aux>
+      );
+
+      orderSummaryComp = <OrderSummary  ingredients={this.state.ingredients} 
+        purchaseCancelled={this.purchaseCancelHandler}
+        purchaseContinued={this.purchaseContinueHandler}
+        price={this.state.totalPrice.toFixed(2)} />;
+    }
+
 
     if(this.state.loading) {
       orderSummaryComp = <Spinner />;
@@ -138,14 +163,7 @@ class BurgerBuilder extends Component {
         <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
           {orderSummaryComp}
         </Modal>
-        <Burger ingredients={this.state.ingredients} />
-        <BuildControls 
-          ingredientsAdded={this.addIngredientsHandler}
-          ingredientsRemoved={this.removeIngredientsHandler}
-          disabled={disabledInfo}
-          purchasable={this.state.purchasable}
-          price={this.state.totalPrice} 
-          ordered = {this.purchaseHandler} />
+          {burgerAndBuildCntrComp}
       </Aux>
     );
   }
