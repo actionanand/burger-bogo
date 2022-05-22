@@ -8,6 +8,7 @@ import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import axios from '../../axios-order';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorhandler from '../../hoc/withErrorHandler/withErrorHandler';
+import withRouter from '../../hoc/withRouter/withRouter';
 
 
 const INGREDIENT_PRICES = {
@@ -94,32 +95,34 @@ class BurgerBuilder extends Component {
 
   purchaseContinueHandler = () => {
     // alert('You Continue!');
-    this.setState({loading: true});
+    // this.setState({loading: true});
 
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      customer: {
-        name: 'Anand Raja',
-        address: {
-          street: 'Test street 13',
-          zipCode: '23761',
-          country: 'India'
-        },
-        email: 'ar@test.com'
-      },
-      deliveryMethod: 'fastest'
-    };
+    // const order = {
+    //   ingredients: this.state.ingredients,
+    //   price: this.state.totalPrice,
+    //   customer: {
+    //     name: 'Anand Raja',
+    //     address: {
+    //       street: 'Test street 13',
+    //       zipCode: '23761',
+    //       country: 'India'
+    //     },
+    //     email: 'ar@test.com'
+    //   },
+    //   deliveryMethod: 'fastest'
+    // };
 
-    axios.post('/order.json', order)
-      .then(resp => {
-        this.setState({loading: false, purchasing: false});
-        console.log(resp)
-      })
-      .catch(err => {
-        this.setState({loading: false, purchasing: false});
-        console.log(err)
-      });
+    // axios.post('/order.json', order)
+    //   .then(resp => {
+    //     this.setState({loading: false, purchasing: false});
+    //     console.log(resp)
+    //   })
+    //   .catch(err => {
+    //     this.setState({loading: false, purchasing: false});
+    //     console.log(err)
+    //   });
+
+    this.props.navigate('/checkout');
   }
 
   render() {
@@ -169,4 +172,4 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default withErrorhandler(BurgerBuilder, axios);
+export default withRouter(withErrorhandler(BurgerBuilder, axios));
