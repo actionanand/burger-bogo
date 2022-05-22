@@ -75,6 +75,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - [How to deploy a React, Angular and Vue project to Github pages](https://deepinder.me/how-to-deploy-a-react-angular-vue-project-to-github-pages)
 - [html color names](https://www.htmlcsscolor.com/)
 
+### Routing V6
+
+* [Upgrading from v5 to v6](https://reactrouter.com/docs/en/v6/upgrading/v5)
+* [Migrating to React Router v6: A complete guide](https://blog.logrocket.com/migrating-react-router-v6-complete-guide/)
+* [React Router v6 Preview](https://reacttraining.com/blog/react-router-v6-pre/)
+* [v6 - getting-started](https://reactrouter.com/docs/en/v6/getting-started/concepts)
+* [React router V6: Some of the new changes](https://dev.to/gabrlcj/react-router-v6-some-of-the-new-changes-181m)
+* [Export 'withRouter' (imported as 'withRouter') was not found in 'react-router-dom'](https://bobbyhadz.com/blog/react-export-withrouter-was-not-found-in-react-router-dom)
+
 ### Packages
 
 1. [prop-types npm](https://www.npmjs.com/package/prop-types)
