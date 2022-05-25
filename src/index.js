@@ -1,17 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';  
+import { createStore } from 'redux';
+// import { configureStore } from '@reduxjs/toolkit';
 // import { HashRouter } from 'react-router-dom';
 
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import reducer from './store/reducer';
+
+const store = createStore(reducer);
 
 const app = (
-  <BrowserRouter basename='burger-bogo'>
-    <App />
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter basename='burger-bogo'>
+      <App />
+    </BrowserRouter>
+  </Provider>
 );
 
 // routes like burger-bogo/#/orders
