@@ -14,18 +14,9 @@ import withRouter from '../../hoc/withRouter/withRouter';
 import * as actionTypes from '../../store/actions';
 
 
-const INGREDIENT_PRICES = {
-  salad: 0.5,
-  cheese: 0.4,
-  bacon: 0.7,
-  meat: 1.3
-};
-
 class BurgerBuilder extends Component {
 
   state = {
-    totalPrice: 4,
-    purchasable: false,
     purchasing: false,
     loading: false,
     error: false
@@ -49,7 +40,7 @@ class BurgerBuilder extends Component {
       .reduce((sum, el) => {
         return sum + el;
       }, 0);
-    this.setState({ purchasable: sum > 0 });
+    return sum > 0;
   }
 
   // addIngredientsHandler = (type) => {
@@ -100,11 +91,11 @@ class BurgerBuilder extends Component {
 
     const queryParams = [];
 
-    for(let i in this.state.ingredients) {
-      queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+    for(let i in this.props.ings) {
+      queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.props.ings[i]));
 
     }
-    queryParams.push('price=' + this.state.totalPrice);
+    queryParams.push('price=' + this.props.price);
 
     const queryString = queryParams.join('&');
 
@@ -135,8 +126,8 @@ class BurgerBuilder extends Component {
             ingredientsAdded={this.props.onIngAdded}
             ingredientsRemoved={this.props.onIngRemoved}
             disabled={disabledInfo}
-            purchasable={this.state.purchasable}
-            price={this.state.totalPrice} 
+            purchasable={this.updatePurchaseState(this.props.ings)}
+            price={this.props.price} 
             ordered = {this.purchaseHandler} />
         </Aux>
       );
@@ -144,7 +135,7 @@ class BurgerBuilder extends Component {
       orderSummaryComp = <OrderSummary  ingredients={this.props.ings} 
         purchaseCancelled={this.purchaseCancelHandler}
         purchaseContinued={this.purchaseContinueHandler}
-        price={this.state.totalPrice.toFixed(2)} />;
+        price={this.props.price.toFixed(2)} />;
     }
 
 
@@ -165,7 +156,8 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
   return {
-    ings: state.ingredients
+    ings: state.ingredients,
+    price: state.totalPrice
   };
 };
 
