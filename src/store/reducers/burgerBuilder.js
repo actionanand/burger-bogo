@@ -17,44 +17,53 @@ const INGREDIENT_PRICES = {
   meat: 36.63
 };
 
+
+const addRemoveIngs = (state, action, isAdd=true) => {
+  const updatedIng = isAdd ? 
+    {[action.ingredientName]: state.ingredients[action.ingredientName] + 1} :
+    {[action.ingredientName]: state.ingredients[action.ingredientName] - 1};
+
+  const updatedIngs = updateObject(state.ingredients, updatedIng);
+
+  const totalPrice = isAdd ? 
+    state.totalPrice + INGREDIENT_PRICES[action.ingredientName] :
+    state.totalPrice - INGREDIENT_PRICES[action.ingredientName];
+
+  const updatedState = {
+    ingredients: updatedIngs,
+    totalPrice
+  };
+
+  return updateObject(state, updatedState);
+}
+
+const setIngs = (state, action) => {
+  return updateObject(state, {
+    ingredients: {
+      salad: action.ingredients.salad,
+      bacon: action.ingredients.bacon,
+      cheese: action.ingredients.cheese,
+      meat: action.ingredients.meat
+    },
+    error: false,
+    totalPrice: basePrice
+  });
+};
+
+
 const reducer = (state = initialState, action) => {
   switch(action.type) {
 
-    case actionTypes.ADD_INGREDIENT:
-      const addUpdatedIng = {[action.ingredientName]: state.ingredients[action.ingredientName] + 1};
-      const addUpdatedIngs = updateObject(state.ingredients, addUpdatedIng);
-      const addUpdatedState = {
-        ingredients: addUpdatedIngs,
-        totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
-      };
-      return updateObject(state, addUpdatedState);
+    case actionTypes.ADD_INGREDIENT: return addRemoveIngs(state, action);
+      
+    case actionTypes.REMOVE_INGREDIENT: return addRemoveIngs(state, action, false);
 
-    case actionTypes.REMOVE_INGREDIENT:
-      const subUpdatedIng = {[action.ingredientName]: state.ingredients[action.ingredientName] - 1};
-      const subUpdatedIngs = updateObject(state.ingredients, subUpdatedIng);
-      const subUpdatedState = {
-        ingredients: subUpdatedIngs,
-        totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
-      };
-      return updateObject(state, subUpdatedState);
-
-    case actionTypes.SET_INGREDIENTS:
-      return updateObject(state, {
-        ingredients: {
-          salad: action.ingredients.salad,
-          bacon: action.ingredients.bacon,
-          cheese: action.ingredients.cheese,
-          meat: action.ingredients.meat
-        },
-        error: false,
-        totalPrice: basePrice
-      });
-
+    case actionTypes.SET_INGREDIENTS: return setIngs(state, action);
+ 
     case actionTypes.FETCH_INGREDIENTS_FAILED:
       return updateObject(state, { error: true });
 
-    default:
-      return state;
+    default: return state;
   }
 };
 
