@@ -104,6 +104,7 @@ class BurgerBuilder extends Component {
             disabled={disabledInfo}
             purchasable={this.updatePurchaseState(this.props.ings)}
             price={this.props.price} 
+            basePrice={this.props.basePrice}
             ordered = {this.purchaseHandler} />
         </Aux>
       );
@@ -131,7 +132,8 @@ const mapStateToProps = state => {
   return {
     ings: state.burgerBuilder.ingredients,
     price: state.burgerBuilder.totalPrice,
-    error: state.burgerBuilder.error
+    error: state.burgerBuilder.error,
+    basePrice: state.burgerBuilder.basePrice
   };
 };
 
