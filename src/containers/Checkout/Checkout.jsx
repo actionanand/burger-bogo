@@ -7,6 +7,7 @@ import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSumm
 import withRouter from '../../hoc/withRouter/withRouter';
 import ContactData from './ContactData/ContactData';
 
+
 class Checkout extends Component {
 
   constructor() {
@@ -34,6 +35,7 @@ class Checkout extends Component {
 
   // }
 
+
   checkoutCancelledHandler() {
     this.props.navigate('/');
   }
@@ -46,8 +48,11 @@ class Checkout extends Component {
     let summary = <Navigate to="/" />;
 
     if (this.props.ings) {
+      const purchasedRedirect = this.props.purchased ? <Navigate to="/" /> : null ;
       summary = (
         <div>
+          { purchasedRedirect }
+
           <CheckoutSummary 
             ingredients={this.props.ings}
             checkoutCancelled={this.checkoutCancelledHandler}
@@ -67,8 +72,10 @@ class Checkout extends Component {
 
 const mapStateToProps = state => {
   return {
-    ings: state.ingredients
+    ings: state.burgerBuilder.ingredients,
+    purchased: state.orders.purchased
   };
 };
+
 
 export default connect(mapStateToProps)(withRouter(Checkout));
