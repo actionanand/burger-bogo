@@ -76,6 +76,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - [How to Deploy a Routed React App to GitHub Pages](https://www.freecodecamp.org/news/deploy-a-react-app-to-github-pages/)
 - [Deployment - React official](https://create-react-app.dev/docs/deployment/#github-pages-https-pagesgithubcom)
 - [html color names](https://www.htmlcsscolor.com/)
+- [Date to timestamp converter](https://planetcalc.com/7157/)
 
 ### Routing V6
 
