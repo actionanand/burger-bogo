@@ -76,6 +76,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - [How to Deploy a Routed React App to GitHub Pages](https://www.freecodecamp.org/news/deploy-a-react-app-to-github-pages/)
 - [Deployment - React official](https://create-react-app.dev/docs/deployment/#github-pages-https-pagesgithubcom)
 - [html color names](https://www.htmlcsscolor.com/)
+- [Date to timestamp converter](https://planetcalc.com/7157/)
 
 ### Routing V6
 
@@ -85,6 +86,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 * [v6 - getting-started](https://reactrouter.com/docs/en/v6/getting-started/concepts)
 * [React router V6: Some of the new changes](https://dev.to/gabrlcj/react-router-v6-some-of-the-new-changes-181m)
 * [Export 'withRouter' (imported as 'withRouter') was not found in 'react-router-dom'](https://bobbyhadz.com/blog/react-export-withrouter-was-not-found-in-react-router-dom)
+* [redux-devtools-extension github](https://github.com/zalmoxisus/redux-devtools-extension)
 
 ### Packages
 
