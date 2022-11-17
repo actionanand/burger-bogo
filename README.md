@@ -77,6 +77,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - [Deployment - React official](https://create-react-app.dev/docs/deployment/#github-pages-https-pagesgithubcom)
 - [html color names](https://www.htmlcsscolor.com/)
 - [Date to timestamp converter](https://planetcalc.com/7157/)
+- [Adding Custom Environment Variables](https://create-react-app.dev/docs/adding-custom-environment-variables/)
 
 ### Routing V6
 
