@@ -42,6 +42,13 @@ export const checkAuthTimeout = expirationTime => {
   };
 }
 
+export const setAuthRedirectPath = path => {
+  return {
+    type: actionTypes.SET_AUTH_REDIRECT_PATH,
+    path
+  };
+};
+
 
 export const auth = (email, password, isSignUp = true) => {
   const authUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:';

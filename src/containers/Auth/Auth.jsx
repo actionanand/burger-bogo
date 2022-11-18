@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 import classes from './Auth.module.css';
 import * as actions from '../../store/actions/index';
@@ -100,6 +101,8 @@ class Auth extends Component {
     });
   }
 
+  
+
   render() {
     const formElemenrArray = [];
 
@@ -133,8 +136,15 @@ class Auth extends Component {
       );
     }
 
+    let redirectToHome = null;
+
+    if(this.props.isAuthenticated) {
+      redirectToHome = <Navigate to="/" />;
+    }
+
     return (
       <div className={classes.Auth}>
+        {redirectToHome}
         {errorMsg}
         <form onSubmit={this.submitHandler}>
           {form}
@@ -152,7 +162,8 @@ class Auth extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.auth.loading,
-    error: state.auth.error
+    error: state.auth.error,
+    isAuthenticated: state.auth.token != null 
   };
 };
 
