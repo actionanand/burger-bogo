@@ -7,7 +7,8 @@ const initialState = {
   ingredients: null,
   totalPrice: basePrice,
   error: false,
-  basePrice
+  basePrice,
+  building: false
 };
 
 const INGREDIENT_PRICES = {
@@ -31,7 +32,8 @@ const addRemoveIngs = (state, action, isAdd=true) => {
 
   const updatedState = {
     ingredients: updatedIngs,
-    totalPrice
+    totalPrice,
+    building: true
   };
 
   return updateObject(state, updatedState);
@@ -46,7 +48,8 @@ const setIngs = (state, action) => {
       meat: action.ingredients.meat
     },
     error: false,
-    totalPrice: basePrice
+    totalPrice: basePrice,
+    building: false
   });
 };
 
