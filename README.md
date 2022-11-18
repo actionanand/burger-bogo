@@ -88,6 +88,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 * [React router V6: Some of the new changes](https://dev.to/gabrlcj/react-router-v6-some-of-the-new-changes-181m)
 * [Export 'withRouter' (imported as 'withRouter') was not found in 'react-router-dom'](https://bobbyhadz.com/blog/react-export-withrouter-was-not-found-in-react-router-dom)
 * [redux-devtools-extension github](https://github.com/zalmoxisus/redux-devtools-extension)
+* [React Router 6: Redirect](https://www.robinwieruch.de/react-router-redirect/)
 
 ### Packages
 
