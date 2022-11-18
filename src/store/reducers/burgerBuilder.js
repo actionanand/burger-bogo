@@ -2,12 +2,14 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
 
 const basePrice = 80; 
+const maxAllowedIng = 3;
 
 const initialState = {
   ingredients: null,
   totalPrice: basePrice,
   error: false,
   basePrice,
+  maxAllowedIng,
   building: false
 };
 

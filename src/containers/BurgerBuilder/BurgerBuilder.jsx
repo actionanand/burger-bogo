@@ -95,6 +95,12 @@ class BurgerBuilder extends Component {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
 
+    const maxAllowedIngsInfo = {...this.props.ings};
+
+    for(let key in maxAllowedIngsInfo) {
+      maxAllowedIngsInfo[key] = maxAllowedIngsInfo[key] >= this.props.maxAllowedIng;
+    }
+
     let burgerAndBuildCntrComp = this.props.error ? <p>Unable to fetch ingredients!</p> : <Spinner />; 
     let orderSummaryComp = null;
 
@@ -106,6 +112,7 @@ class BurgerBuilder extends Component {
             ingredientsAdded={this.props.onIngAdded}
             ingredientsRemoved={this.props.onIngRemoved}
             disabled={disabledInfo}
+            maxAllowedIng={maxAllowedIngsInfo}
             purchasable={this.updatePurchaseState(this.props.ings)}
             price={this.props.price} 
             basePrice={this.props.basePrice}
@@ -139,6 +146,7 @@ const mapStateToProps = state => {
     price: state.burgerBuilder.totalPrice,
     error: state.burgerBuilder.error,
     basePrice: state.burgerBuilder.basePrice,
+    maxAllowedIng: state.burgerBuilder.maxAllowedIng,
     isAuthenticated: state.auth.token != null
   };
 };
