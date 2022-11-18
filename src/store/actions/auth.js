@@ -24,18 +24,24 @@ export const authFail = error => {
 }
 
 export const logout = () => {
+  clearTimeout(timeOutId);
+
   return {
     type: actionTypes.AUTH_LOGOUT
   };
 }
 
+let timeOutId;
+
 export const checkAuthTimeout = expirationTime => {
   return dispatch => {
-    setTimeout(() => {
+    timeOutId = setTimeout(() => {
+      console.log('inside finised');
       dispatch(logout());
-    }, expirationTime * 1000);
+    }, 50 * expirationTime);
   };
 }
+
 
 export const auth = (email, password, isSignUp = true) => {
   const authUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:';
