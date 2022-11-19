@@ -2,6 +2,15 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Live websites
+
+1. https://actionanand.github.io/burger-bogo/
+2. https://burger-bogo.web.app/
+3. https://burger-bogo.firebaseapp.com/
+
+> To deploy in `firebase`, remove `homepage` from `package.json` file and `basename` in `BrowserRouter` from `index.js` file.
+
+
 ## Available Scripts
 
 In the project directory, you can run:
