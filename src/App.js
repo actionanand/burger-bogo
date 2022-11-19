@@ -33,6 +33,7 @@ class App extends Component {
           <Route path='/' element={<BurgerBuilder/>} />
           <Route path='/checkout/*' element={<Checkout/>} />
           <Route path='/orders' element={<Orders/>} />
+          <Route path='/auth' element={<Auth/>} />
           <Route path='/logout' element={<Logout/>} />
           <Route path='*' element={shouldRedirect ? <Navigate replace to='/' /> : null } />
         </Routes>
