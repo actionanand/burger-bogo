@@ -24,23 +24,28 @@ export const authFail = error => {
 }
 
 export const logout = () => {
-  clearTimeout(timeOutId);
-  localStorage.removeItem('expirationDate');
-  localStorage.removeItem('token');
-  localStorage.removeItem('userId');
+  // clearTimeout(timeOutId);
+  // localStorage.removeItem('expirationDate');
+  // localStorage.removeItem('token');
+  // localStorage.removeItem('userId');
 
   return {
-    type: actionTypes.AUTH_LOGOUT
+    type: actionTypes.AUTH_INITIATE_LOGOUT
   };
 }
 
-let timeOutId;
+// let timeOutId;
 
 export const checkAuthTimeout = expirationTime => {
-  return dispatch => {
-    timeOutId = setTimeout(() => {
-      dispatch(logout());
-    }, 1000 * expirationTime);
+  // return dispatch => {
+  //   timeOutId = setTimeout(() => {
+  //     dispatch(logout());
+  //   }, 1000 * expirationTime);
+  // };
+
+  return {
+    type: actionTypes.AUTH_CHECK_TIMEOUT,
+    expirationTime
   };
 }
 
