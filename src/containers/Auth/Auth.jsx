@@ -7,6 +7,8 @@ import * as actions from '../../store/actions/index';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import { updateObject } from '../../shared/utility';
+import { checkValidity } from '../../shared/validation';
 
 class Auth extends Component {
   state = {
@@ -20,7 +22,8 @@ class Auth extends Component {
         value: '',
         validation: {
           required: true,
-          isEmail: true
+          isEmail: true,
+          minLength: 7
         },
         valid: false,
         touched: false
@@ -34,7 +37,8 @@ class Auth extends Component {
         value: '',
         validation: {
           required: true,
-          minLength: 7
+          minLength: 6,
+          maxLength: 15
         },
         valid: false,
         touched: false
@@ -43,38 +47,6 @@ class Auth extends Component {
     isSignUp: true
   };
 
-  checkValidity(value, rules) {
-    let isValid = true;
-
-    if(!rules) {
-      return;
-    }
-
-    if(rules.required) {
-      isValid = value.trim() !== '' && isValid;
-    }
-
-    if(rules.minLength) {
-      isValid = value.length >= rules.minLength && isValid;
-    }
-
-    if(rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid;
-    }
-
-    if (rules.isEmail) {
-      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      isValid = pattern.test(value) && isValid
-    }
-
-    if (rules.isNumeric) {
-      const pattern = /^\d+$/;
-      isValid = pattern.test(value) && isValid
-    }
-
-
-    return isValid;
-  }
 
   componentDidMount() {
     if(!this.props.buildingBurger && this.props.authRedirectPath !== '/') {
@@ -83,15 +55,13 @@ class Auth extends Component {
   }
 
   inputChangedHandler = (event, controlName) => {
-    const updatedControls = {
-      ...this.state.controls,
-      [controlName]: {
-        ...this.state.controls[controlName],
+    const updatedControls = updateObject(this.state.controls, {
+      [controlName]: updateObject(this.state.controls[controlName], {
         value: event.target.value,
-        valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation),
+        valid: checkValidity(event.target.value, this.state.controls[controlName].validation),
         touched: true
-      }
-    };
+      }) 
+    });
 
     this.setState({controls: updatedControls});
   };
@@ -107,7 +77,6 @@ class Auth extends Component {
     });
   }
 
-  
 
   render() {
     const formElemenrArray = [];
@@ -154,11 +123,11 @@ class Auth extends Component {
         {errorMsg}
         <form onSubmit={this.submitHandler}>
           {form}
-          <Button btnType='Success'> Submit </Button>
+          <Button btnType='Success'> SUBMIT </Button>
         </form>
         <Button btnType="Danger"
           clicked={this.switchAuthModehandler} >
-          Switch to { this.state.isSignUp ? 'Sign Up' : 'Sign In' } 
+          SWITCH TO SIGN { this.state.isSignUp ? 'IN' : 'UP' } 
         </Button>
       </div>
     );

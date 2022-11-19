@@ -11,6 +11,8 @@ import Input from '../../../components/UI/Input/Input';
 import withRouter from '../../../hoc/withRouter/withRouter';
 import withErrorhandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../../store/actions/index';
+import { updateObject } from '../../../shared/utility';
+import { checkValidity } from '../../../shared/validation';
 
 
 class ContactData extends Component {
@@ -24,7 +26,8 @@ class ContactData extends Component {
           },
           value: '',
           validation: {
-            required: true
+            required: true,
+            minLength: 3
           },
           valid: false,
           touched: false
@@ -37,7 +40,8 @@ class ContactData extends Component {
           },
           value: '',
           validation: {
-            required: true
+            required: true,
+            minLength: 3
           },
           valid: false,
           touched: false
@@ -52,7 +56,8 @@ class ContactData extends Component {
           validation: {
             required: true,
             minLength: 5,
-            maxLength: 6
+            maxLength: 6,
+            isNumeric: true
           },
           valid: false,
           touched: false
@@ -65,7 +70,8 @@ class ContactData extends Component {
           },
           value: '',
           validation: {
-            required: true
+            required: true,
+            minLength: 3
           },
           valid: false,
           touched: false
@@ -78,7 +84,9 @@ class ContactData extends Component {
           },
           value: '',
           validation: {
-            required: true
+            required: true,
+            isEmail: true,
+            minLength: 7
           },
           valid: false,
           touched: false
@@ -99,38 +107,6 @@ class ContactData extends Component {
     isFormValid: false
   };
 
-  checkValidity(value, rules) {
-    let isValid = true;
-
-    if(!rules) {
-      return;
-    }
-
-    if(rules.required) {
-      isValid = value.trim() !== '' && isValid;
-    }
-
-    if(rules.minLength) {
-      isValid = value.length >= rules.minLength && isValid;
-    }
-
-    if(rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid;
-    }
-
-    if (rules.isEmail) {
-      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      isValid = pattern.test(value) && isValid
-    }
-
-    if (rules.isNumeric) {
-      const pattern = /^\d+$/;
-      isValid = pattern.test(value) && isValid
-    }
-
-
-    return isValid;
-  }
 
   orderHandler = (event) => {
     event.preventDefault();
@@ -153,16 +129,19 @@ class ContactData extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-    const updatedOrderForm = { ...this.state.orderForm };
+    
+    const updatedFormEl = updateObject(this.state.orderForm[inputIdentifier], {
+      value: event.target.value,
+      valid: checkValidity(event.target.value, this.state.orderForm[inputIdentifier].validation),
+      touched: true
+    });
 
-    const updatedFormEl = { ...updatedOrderForm[inputIdentifier] };
-
-    updatedFormEl.value = event.target.value;
-    updatedFormEl.valid = this.checkValidity(updatedFormEl.value, updatedFormEl.validation);
-    updatedFormEl.touched = true;
-    updatedOrderForm[inputIdentifier] = updatedFormEl;
-
+    const updatedOrderForm = updateObject(this.state.orderForm, {
+      [inputIdentifier]: updatedFormEl
+    });
+    
     let isFormValid = true;
+
     for(let formIdentifier in updatedOrderForm) {
       isFormValid = updatedOrderForm[formIdentifier].valid && isFormValid;
     }
