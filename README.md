@@ -89,6 +89,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 * [Export 'withRouter' (imported as 'withRouter') was not found in 'react-router-dom'](https://bobbyhadz.com/blog/react-export-withrouter-was-not-found-in-react-router-dom)
 * [redux-devtools-extension github](https://github.com/zalmoxisus/redux-devtools-extension)
 * [React Router 6: Redirect](https://www.robinwieruch.de/react-router-redirect/)
+* [Lazy Loading with React–An Overview](https://www.syncfusion.com/blogs/post/lazy-loading-with-react-an-overview.aspx)
 
 ### Packages
 
