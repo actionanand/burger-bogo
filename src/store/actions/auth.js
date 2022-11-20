@@ -50,24 +50,10 @@ export const setAuthRedirectPath = path => {
 };
 
 export const authCheckState = () => {
-  return dispatch => {
-    const token = JSON.parse(localStorage.getItem('token'));
-
-    if(!token) {
-      return;
-    } else {
-      const expirationDate = new Date(localStorage.getItem('expirationDate'));
-      if(expirationDate >= new Date()) {
-        const userId = JSON.parse(localStorage.getItem('userId'));
-        dispatch(authSuccess(token, userId));
-        dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000));
-      } else {
-        return;
-      }
-    }
+  return {
+    type: actionTypes.AUTH_CHECK_INITAIL_STATE
   };
 };
-
 
 export const auth = (email, password, isSignUp = true) => {
   return {
