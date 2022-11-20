@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import * as actionTypes from './actionTypes';
 
 export const authStart = () => {
@@ -24,11 +22,6 @@ export const authFail = error => {
 }
 
 export const logout = () => {
-  // clearTimeout(timeOutId);
-  // localStorage.removeItem('expirationDate');
-  // localStorage.removeItem('token');
-  // localStorage.removeItem('userId');
-
   return {
     type: actionTypes.AUTH_INITIATE_LOGOUT
   };
@@ -77,35 +70,10 @@ export const authCheckState = () => {
 
 
 export const auth = (email, password, isSignUp = true) => {
-  const authUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:';
-  let authPath = 'signUp';
-
-  if (!isSignUp) {
-    authPath = 'signInWithPassword';
-  }
-
-  return dispatch => {
-    dispatch(authStart());
-    const authData = {
-      email,
-      password,
-      returnSecureToken: true
-    };
-
-    axios.post(authUrl + authPath + '?key=' + process.env.REACT_APP_AUTH_KEY, authData)
-      .then(resp => {
-        // console.log(resp);
-        const expirationDate = new Date(new Date().getTime() + (resp.data.expiresIn * 1000));
-        localStorage.setItem('token', JSON.stringify(resp.data.idToken));
-        localStorage.setItem('expirationDate', expirationDate);
-        localStorage.setItem('userId', JSON.stringify(resp.data.localId));
-
-        dispatch(authSuccess(resp.data.idToken, resp.data.localId));
-        dispatch(checkAuthTimeout(resp.data.expiresIn));
-      })
-      .catch(err => {
-        console.log(err);
-        dispatch(authFail(err.response.data.error));
-      })
+  return {
+    type: actionTypes.AUTH_USER,
+    email,
+    password,
+    isSignUp
   };
 }
